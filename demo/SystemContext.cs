@@ -9,5 +9,7 @@ namespace demo
     class SystemContext
     {
         public static User_ User_ { get; set; } = null;
+
+        public static string whereIsWas { get; set; } = null;
     }
 }

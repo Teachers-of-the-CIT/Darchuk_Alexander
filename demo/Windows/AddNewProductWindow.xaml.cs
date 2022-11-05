@@ -23,5 +23,12 @@ namespace demo.Windows
         {
             InitializeComponent();
         }
+
+        private void ButtonBackAdminMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            AdminMainWindow adminMainWindow = new AdminMainWindow();
+            this.Close();
+            adminMainWindow.ShowDialog();
+        }
     }
 }
