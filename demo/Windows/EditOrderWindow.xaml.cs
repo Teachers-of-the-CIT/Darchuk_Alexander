@@ -23,5 +23,27 @@ namespace demo.Windows
         {
             InitializeComponent();
         }
+
+        private void ButtonBackWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (SystemContext.whereIsWas == "AdminMainWindow")
+            {
+                AdminMainWindow adminMainWindow = new AdminMainWindow();
+                this.Close();
+                adminMainWindow.ShowDialog();
+            }
+            if (SystemContext.whereIsWas == "ClientMainWindow")
+            {
+                ClientMainWindow clientMainWindow = new ClientMainWindow();
+                this.Close();
+                clientMainWindow.ShowDialog();
+            }
+            if (SystemContext.whereIsWas == "ManagerMainWindow")
+            {
+                ManagerMainWindow managerMainWindow = new ManagerMainWindow();
+                this.Close();
+                managerMainWindow.ShowDialog();
+            }
+        }
     }
 }

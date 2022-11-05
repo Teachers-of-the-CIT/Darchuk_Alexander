@@ -45,5 +45,13 @@ namespace demo.Windows
             this.Close();
             checkoutWindow.ShowDialog();
         }
+
+        private void ButtonEditOrder_Click(object sender, RoutedEventArgs e)
+        {
+            EditOrderWindow editOrderWindow = new EditOrderWindow();
+            SystemContext.whereIsWas = "AdminMainWindow";
+            this.Close();
+            editOrderWindow.ShowDialog();
+        }
     }
 }
