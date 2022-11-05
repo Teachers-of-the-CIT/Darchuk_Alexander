@@ -23,5 +23,35 @@ namespace demo.Windows
         {
             InitializeComponent();
         }
+        
+        private void ButtonBackMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.ShowDialog();
+        }
+        
+        private void ButtonAddNewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewProductWindow addNewProductWindow = new AddNewProductWindow();
+            this.Close();
+            addNewProductWindow.ShowDialog();
+        }
+
+        private void ButtonCreateNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CheckoutWindow checkoutWindow = new CheckoutWindow();
+            SystemContext.whereIsWas = "AdminMainWindow";
+            this.Close();
+            checkoutWindow.ShowDialog();
+        }
+
+        private void ButtonEditOrder_Click(object sender, RoutedEventArgs e)
+        {
+            EditOrderWindow editOrderWindow = new EditOrderWindow();
+            SystemContext.whereIsWas = "AdminMainWindow";
+            this.Close();
+            editOrderWindow.ShowDialog();
+        }
     }
 }

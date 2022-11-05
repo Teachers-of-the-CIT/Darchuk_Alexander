@@ -24,6 +24,8 @@ namespace demo
         public MainWindow()
         {
             InitializeComponent();
+            LoginTB.Text = "o@outlook.com";
+            PasswordPB.Password = "2L6KZG";
         }
 
         private void GuestEnter_Click(object sender, RoutedEventArgs e)

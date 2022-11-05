@@ -23,5 +23,20 @@ namespace demo.Windows
         {
             InitializeComponent();
         }
+
+        private void ButtonBackMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.ShowDialog();
+        }
+
+        private void ButtonCreateNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CheckoutWindow checkoutWindow = new CheckoutWindow();
+            SystemContext.whereIsWas = "ClientMainWindow";
+            this.Close();
+            checkoutWindow.ShowDialog();
+        }
     }
 }
