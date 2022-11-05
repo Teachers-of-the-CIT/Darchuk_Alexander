@@ -30,5 +30,13 @@ namespace demo.Windows
             this.Close();
             mainWindow.ShowDialog();
         }
+
+        private void ButtonCreateNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CheckoutWindow checkoutWindow = new CheckoutWindow();
+            SystemContext.whereIsWas = "ClientMainWindow";
+            this.Close();
+            checkoutWindow.ShowDialog();
+        }
     }
 }
