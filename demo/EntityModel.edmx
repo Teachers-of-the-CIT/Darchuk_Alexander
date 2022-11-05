@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище OOO_ParfumerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Order_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeForSeparation" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Current_Date_" Type="datetime" Nullable="false" />
+          <Property Name="DateOfSeparation" Type="date" Nullable="false" />
+          <Property Name="Status_" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Order_In_Points">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Points" Type="int" Nullable="false" />
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PointOfIssue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Address_" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description_" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Current_Sale" Type="int" Nullable="false" />
+          <Property Name="Count_" Type="int" Nullable="false" />
+          <Property Name="Price" Type="nvarchar" MaxLength="100" />
+          <Property Name="Image_" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Product_In_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Product" Type="int" Nullable="false" />
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Login_" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password_" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Role_" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Order_In___ID_Or__6D0D32F4">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="Order_In_Points" Type="Self.Order_In_Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order_In_Points">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_In___ID_Po__6C190EBB">
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="1" />
+          <End Role="Order_In_Points" Type="Self.Order_In_Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PointOfIssue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order_In_Points">
+              <PropertyRef Name="ID_Points" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_I__ID_Or__693CA210">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="Product_In_Order" Type="Self.Product_In_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_In_Order">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_I__ID_Pr__68487DD7">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product_In_Order" Type="Self.Product_In_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_In_Order">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Orde__ID_Or__656C112C">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="User_Orders" Type="Self.User_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Orders">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Orde__ID_Us__6477ECF3">
+          <End Role="User_" Type="Self.User_" Multiplicity="1" />
+          <End Role="User_Orders" Type="Self.User_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Orders">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище OOO_ParfumerModelContainer">
+          <EntitySet Name="Order_" EntityType="Self.Order_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_In_Points" EntityType="Self.Order_In_Points" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PointOfIssue" EntityType="Self.PointOfIssue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_In_Order" EntityType="Self.Product_In_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_" EntityType="Self.User_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Orders" EntityType="Self.User_Orders" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Order_In___ID_Or__6D0D32F4" Association="Self.FK__Order_In___ID_Or__6D0D32F4">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Order_In_Points" EntitySet="Order_In_Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_In___ID_Po__6C190EBB" Association="Self.FK__Order_In___ID_Po__6C190EBB">
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+            <End Role="Order_In_Points" EntitySet="Order_In_Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_I__ID_Or__693CA210" Association="Self.FK__Product_I__ID_Or__693CA210">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Product_In_Order" EntitySet="Product_In_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_I__ID_Pr__68487DD7" Association="Self.FK__Product_I__ID_Pr__68487DD7">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_In_Order" EntitySet="Product_In_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Orde__ID_Or__656C112C" Association="Self.FK__User_Orde__ID_Or__656C112C">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="User_Orders" EntitySet="User_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Orde__ID_Us__6477ECF3" Association="Self.FK__User_Orde__ID_Us__6477ECF3">
+            <End Role="User_" EntitySet="User_" />
+            <End Role="User_Orders" EntitySet="User_Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OOO_ParfumerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Order_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeForSeparation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Current_Date_" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfSeparation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status_" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order_In_Points" Relationship="Self.FK__Order_In___ID_Or__6D0D32F4" FromRole="Order_" ToRole="Order_In_Points" />
+          <NavigationProperty Name="Product_In_Order" Relationship="Self.FK__Product_I__ID_Or__693CA210" FromRole="Order_" ToRole="Product_In_Order" />
+          <NavigationProperty Name="User_Orders" Relationship="Self.FK__User_Orde__ID_Or__656C112C" FromRole="Order_" ToRole="User_Orders" />
+        </EntityType>
+        <EntityType Name="Order_In_Points">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Points" Type="Int32" Nullable="false" />
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK__Order_In___ID_Or__6D0D32F4" FromRole="Order_In_Points" ToRole="Order_" />
+          <NavigationProperty Name="PointOfIssue" Relationship="Self.FK__Order_In___ID_Po__6C190EBB" FromRole="Order_In_Points" ToRole="PointOfIssue" />
+        </EntityType>
+        <EntityType Name="PointOfIssue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order_In_Points" Relationship="Self.FK__Order_In___ID_Po__6C190EBB" FromRole="PointOfIssue" ToRole="Order_In_Points" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description_" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Current_Sale" Type="Int32" Nullable="false" />
+          <Property Name="Count_" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Image_" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_In_Order" Relationship="Self.FK__Product_I__ID_Pr__68487DD7" FromRole="Product" ToRole="Product_In_Order" />
+        </EntityType>
+        <EntityType Name="Product_In_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK__Product_I__ID_Or__693CA210" FromRole="Product_In_Order" ToRole="Order_" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product_I__ID_Pr__68487DD7" FromRole="Product_In_Order" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password_" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role_" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User_Orders" Relationship="Self.FK__User_Orde__ID_Us__6477ECF3" FromRole="User_" ToRole="User_Orders" />
+        </EntityType>
+        <EntityType Name="User_Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK__User_Orde__ID_Or__656C112C" FromRole="User_Orders" ToRole="Order_" />
+          <NavigationProperty Name="User_" Relationship="Self.FK__User_Orde__ID_Us__6477ECF3" FromRole="User_Orders" ToRole="User_" />
+        </EntityType>
+        <Association Name="FK__Order_In___ID_Or__6D0D32F4">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="Order_In_Points" Type="Self.Order_In_Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order_In_Points">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_I__ID_Or__693CA210">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="Product_In_Order" Type="Self.Product_In_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_In_Order">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Orde__ID_Or__656C112C">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="1" />
+          <End Role="User_Orders" Type="Self.User_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Orders">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_In___ID_Po__6C190EBB">
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="1" />
+          <End Role="Order_In_Points" Type="Self.Order_In_Points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PointOfIssue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order_In_Points">
+              <PropertyRef Name="ID_Points" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_I__ID_Pr__68487DD7">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product_In_Order" Type="Self.Product_In_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product_In_Order">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Orde__ID_Us__6477ECF3">
+          <End Role="User_" Type="Self.User_" Multiplicity="1" />
+          <End Role="User_Orders" Type="Self.User_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Orders">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OOO_ParfumerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Order_" EntityType="Self.Order_" />
+          <EntitySet Name="Order_In_Points" EntityType="Self.Order_In_Points" />
+          <EntitySet Name="PointOfIssue" EntityType="Self.PointOfIssue" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Product_In_Order" EntityType="Self.Product_In_Order" />
+          <EntitySet Name="User_" EntityType="Self.User_" />
+          <EntitySet Name="User_Orders" EntityType="Self.User_Orders" />
+          <AssociationSet Name="FK__Order_In___ID_Or__6D0D32F4" Association="Self.FK__Order_In___ID_Or__6D0D32F4">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Order_In_Points" EntitySet="Order_In_Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_I__ID_Or__693CA210" Association="Self.FK__Product_I__ID_Or__693CA210">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Product_In_Order" EntitySet="Product_In_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Orde__ID_Or__656C112C" Association="Self.FK__User_Orde__ID_Or__656C112C">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="User_Orders" EntitySet="User_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_In___ID_Po__6C190EBB" Association="Self.FK__Order_In___ID_Po__6C190EBB">
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+            <End Role="Order_In_Points" EntitySet="Order_In_Points" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_I__ID_Pr__68487DD7" Association="Self.FK__Product_I__ID_Pr__68487DD7">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_In_Order" EntitySet="Product_In_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Orde__ID_Us__6477ECF3" Association="Self.FK__User_Orde__ID_Us__6477ECF3">
+            <End Role="User_" EntitySet="User_" />
+            <End Role="User_Orders" EntitySet="User_Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OOO_ParfumerModelContainer" CdmEntityContainer="OOO_ParfumerEntities">
+          <EntitySetMapping Name="Order_">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.Order_">
+              <MappingFragment StoreEntitySet="Order_">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CodeForSeparation" ColumnName="CodeForSeparation" />
+                <ScalarProperty Name="Current_Date_" ColumnName="Current_Date_" />
+                <ScalarProperty Name="DateOfSeparation" ColumnName="DateOfSeparation" />
+                <ScalarProperty Name="Status_" ColumnName="Status_" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_In_Points">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.Order_In_Points">
+              <MappingFragment StoreEntitySet="Order_In_Points">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Points" ColumnName="ID_Points" />
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PointOfIssue">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.PointOfIssue">
+              <MappingFragment StoreEntitySet="PointOfIssue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Address_" ColumnName="Address_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description_" ColumnName="Description_" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Current_Sale" ColumnName="Current_Sale" />
+                <ScalarProperty Name="Count_" ColumnName="Count_" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Image_" ColumnName="Image_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_In_Order">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.Product_In_Order">
+              <MappingFragment StoreEntitySet="Product_In_Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.User_">
+              <MappingFragment StoreEntitySet="User_">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Login_" ColumnName="Login_" />
+                <ScalarProperty Name="Password_" ColumnName="Password_" />
+                <ScalarProperty Name="Role_" ColumnName="Role_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Orders">
+            <EntityTypeMapping TypeName="OOO_ParfumerModel.User_Orders">
+              <MappingFragment StoreEntitySet="User_Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
