@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace demo.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для ManagerMainWindow.xaml
+    /// Логика взаимодействия для EditOrderWindow.xaml
     /// </summary>
-    public partial class ManagerMainWindow : Window
+    public partial class EditOrderWindow : Window
     {
-        public ManagerMainWindow()
+        public EditOrderWindow()
         {
             InitializeComponent();
-        }
-
-        private void ButtonBackMainWindow_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.ShowDialog();
         }
     }
 }

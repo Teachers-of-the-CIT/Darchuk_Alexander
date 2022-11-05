@@ -23,5 +23,12 @@ namespace demo.Windows
         {
             InitializeComponent();
         }
+
+        private void ButtonBackMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.ShowDialog();
+        }
     }
 }

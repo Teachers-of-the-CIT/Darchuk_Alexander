@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace demo.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для ManagerMainWindow.xaml
+    /// Логика взаимодействия для CheckoutWindow.xaml
     /// </summary>
-    public partial class ManagerMainWindow : Window
+    public partial class CheckoutWindow : Window
     {
-        public ManagerMainWindow()
+        public CheckoutWindow()
         {
             InitializeComponent();
-        }
-
-        private void ButtonBackMainWindow_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.ShowDialog();
         }
     }
 }

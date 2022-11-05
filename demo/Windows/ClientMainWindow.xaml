@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo.Windows"
         mc:Ignorable="d"
-        Title="ClientMainWindow" Height="450" Width="800">
+        Title="ClientMainWindow" Height="450" Width="800" Icon="/demo;component/images/icon.ico">
     <Grid>
-        
+        <Button Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Candara" Background="#B3F4E9" FontSize="20" FontWeight="Bold" Margin="10,10,0,0" Width="120" Height="35" VerticalContentAlignment="Center" Click="ButtonBackMainWindow_Click"/>
     </Grid>
 </Window>
